@@ -44,7 +44,7 @@ window.login = () => {
     if (id === "teacher1" && pass === "mgm123") {
         document.getElementById("login-page").style.display = "none";
         document.getElementById("main-app").style.display = "block";
-        alert("Authorized Access. Welcome Professor Sourav Das!");
+        alert("Authorized Access. Welcome Professor PRADIP GUDDE!");
     } else {
         alert("Invalid Access Control Credentials! Try (teacher1 / mgm123)");
     }
