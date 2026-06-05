@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance MS - MGM College</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="login-page" class="page active">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>📊 Attendance MS</h2>
+                <p>MGM College of CS & IT</p>
+            </div>
+            <div class="login-body">
+                <div class="input-group">
+                    <label>Teacher Login ID</label>
+                    <input type="text" id="user-id" placeholder="Enter Teacher ID (e.g., teacher1)">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="user-pass" placeholder="Enter Password">
+                </div>
+                <button class="btn-login" onclick="login()">SIGN IN</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-app" class="page" style="display:none;">
+        <header class="navbar">
+            <div class="nav-left">
+                <span class="menu-toggle">☰</span>
+                <h1>College Management System</h1>
+            </div>
+            <div class="nav-right">
+                <span class="user-profile-nav">👤 <span id="nav-teacher-name">Sourav Das</span></span>
+            </div>
+        </header>
+
+        <div class="app-container">
+            <nav class="sidebar">
+                <div class="sidebar-user">
+                    <div class="avatar">👤</div>
+                    <div class="user-info">
+                        <h3 id="sidebar-teacher-name">Sourav Das</h3>
+                        <p class="status-online">● Online</p>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li onclick="showPage('page-daily')" class="nav-item active">📊 1. Daily Attendance</li>
+                    <li onclick="showPage('page-percent')" class="nav-item">📈 2. Daily Percentage</li>
+                    <li onclick="showPage('page-add-student')" class="nav-item">➕ 3. Add New Student</li>
+                    <li onclick="showPage('page-monthly-percent')" class="nav-item">🗓️ 4. Monthly Attendance</li>
+                    <li onclick="showPage('page-admin-analysis')" class="nav-item">⚙️ 5. Admin Analysis</li>
+                    <li onclick="showPage('page-exam-marks')" class="nav-item">📝 6. Monthly Exam Marks</li>
+                    <li onclick="showPage('page-parent-contact')" class="nav-item">📞 7. Parent Mobile Log</li>
+                    <li onclick="logout()" class="nav-item logout-link">Logout 🚪</li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+
+                <div id="page-daily" class="content-page active">
+                    <div class="dashboard-grid">
+                        <div class="left-panel">
+                            <div class="card panel-attendance">
+                                <div class="card-header bg-red">
+                                    <h3>Total Attendance</h3>
+                                    <div class="date-picker-box">
+                                        <label>Date: </label>
+                                        <input type="date" id="class-date" value="2026-06-04">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Roll No</th>
+                                                <th>Name</th>
+                                                <th>Percentage (Current Month)</th>
+                                                <th>Monthly Presence (Lectures)</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="attendance-tbody">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Abhishek Kumar Soren</td>
+                                                <td class="pct-cell" id="pct-1">18.75 %</td>
+                                                <td id="lect-1">18</td>
+                                                <td>
+                                                    <button class="btn-action present" onclick="markAttendance(1, 'Abhishek Kumar Soren', 'Present')">⚙️ Present</button>
+                                                    <button class="btn-action absent" onclick="markAttendance(1, 'Abhishek Kumar Soren', 'Absent')">➖ Absent</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="bottom-flex">
+                                <div class="card flex-child">
+                                    <div class="card-header bg-red-light">
+                                        <h3>Automated Messages (Daily Log)</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="log-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Roll</th>
+                                                    <th>Student & Contact</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="absentee-log-tbody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card flex-child">
+                                    <div class="card-header bg-brown">
+                                        <h3>Internal Exam Monthly Mark Entry</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group-row">
+                                            <select id="exam-month-select">
+                                                <option>Internal Test 1 (June 2026)</option>
+                                                <option>Internal Test 2</option>
+                                            </select>
+                                        </div>
+                                        <table class="marks-entry-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Roll No</th>
+                                                    <th>Student Name</th>
+                                                    <th>Marks (Max 30)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="marks-tbody">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Abhishek Kumar Soren</td>
+                                                    <td><input type="number" class="table-input-marks" value="24" id="marks-1"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn-save-marks" onclick="saveInternalMarks()">Save Marks</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="right-panel">
+                            <div class="card bg-orange stats-card">
+                                <div class="stats-text">
+                                    <h3>Monthly Lectures Tracked:</h3>
+                                    <h2>24 (BCA501)</h2>
+                                    <p>Aggregate Present: <strong>78.4%</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="card panel-subjects">
+                                <div class="card-header bg-green">
+                                    <h3>Select A Subject</h3>
+                                </div>
+                                <div class="subject-list">
+                                    <div class="subject-item selected" onclick="selectSubject('BCA501')">
+                                        <h4>BCA501</h4>
+                                        <p>Data Communication & Networks</p>
+                                    </div>
+                                    <div class="subject-item" onclick="selectSubject('BCA502')">
+                                        <h4>BCA502</h4>
+                                        <p>Unix And Shell Programming</p>
+                                    </div>
+                                    <div class="subject-item" onclick="selectSubject('BCA E501-C')">
+                                        <h4>BCA E501-C</h4>
+                                        <p>Multimedia & E-Commerce</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-percent" class="content-page">
+                    <div class="card">
+                        <div class="card-header bg-blue">
+                            <h3>Daily Percentage Log Analytics</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject Code</th>
+                                        <th>Total Registered</th>
+                                        <th>Present Today</th>
+                                        <th>Absent Today</th>
+                                        <th>Attendance Yield %</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="daily-yield-tbody">
+                                    <tr>
+                                        <td>BCA501</td>
+                                        <td id="yield-total">1</td>
+                                        <td id="yield-p">0</td>
+                                        <td id="yield-a">0</td>
+                                        <td id="yield-pct">0.00%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-add-student" class="content-page">
+                    <div class="card form-card">
+                        <div class="card-header bg-blue">
+                            <h3>➕ Register New Student & Parents Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Full Student Name:</label>
+                                <input type="text" id="s-name" placeholder="Enter Full Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Roll Number Assignment:</label>
+                                <input type="number" id="s-roll" placeholder="Enter Roll Number">
+                            </div>
+                            <div class="form-group">
+                                <label>Parent Emergency Mobile No:</label>
+                                <input type="text" id="s-phone" placeholder="Enter 10-digit Mobile Number">
+                            </div>
+                            <button class="btn-submit-form" onclick="addStudent()">Save to Cloud Database</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-monthly-percent" class="content-page">
+                    <div class="card">
+                        <div class="card-header bg-purple">
+                            <h3>Monthly Attendance Percentage Summary</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No</th>
+                                        <th>Student Name</th>
+                                        <th>June 2026 Avg %</th>
+                                        <th>Status Threshold</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monthly-summary-tbody">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Abhishek Kumar Soren</td>
+                                        <td>18.75%</td>
+                                        <td><span class="badge-danger">Shortage</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-admin-analysis" class="content-page">
+                    <div class="card">
+                        <div class="card-header bg-dark">
+                            <h3>Admin Analysis Dashboard</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>MGM Faculty Section: <strong>BCA-1-A</strong> Status active context.</p>
+                            <p>Total operational sync latency: 14ms Cloud Server.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-exam-marks" class="content-page">
+                    <div class="card">
+                        <div class="card-header bg-brown">
+                            <h3>Monthly Internal Assessment Marks Registry</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table" id="exam-registry-table">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No</th>
+                                        <th>Student Name</th>
+                                        <th>Test Type</th>
+                                        <th>Secured Marks (30)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Abhishek Kumar Soren</td>
+                                        <td>Internal Test 1</td>
+                                        <td>24 / 30</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-parent-contact" class="content-page">
+                    <div class="card">
+                        <div class="card-header bg-green">
+                            <h3>Parent Mobile & Notification Contact Log</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Yahan un parents ki list hai jinko notification alerts bheje gaye hain:</p>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Parent Contact Number</th>
+                                        <th>Last Message Payload</th>
+                                        <th>Dispatch System</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="parent-contact-tbody">
+                                    <tr>
+                                        <td>Abhishek Kumar Soren</td>
+                                        <td>+91 9876543210</td>
+                                        <td>Daily Absence System Trigger</td>
+                                        <td><span class="badge-success">Gateway OK</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+
+/* LOGIN STYLING MAPS TO SCREENSHOT */
+
+#login-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+}
+
+.login-card {
+    width: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 25px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-header h2 {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #00a65a;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+/* APP NAVIGATION LAYOUT */
+
+.navbar {
+    height: 60px;
+    background: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.app-container {
+    display: flex;
+    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+}
+
+.sidebar {
+    width: 260px;
+    background: #232d37;
+    color: #b8c7ce;
+}
+
+.sidebar-user {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #1a2229;
+    border-bottom: 1px solid #2c3b41;
+}
+
+.status-online {
+    color: #2ecc71;
+    font-size: 12px;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    padding: 14px 20px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    font-size: 14px;
+    color: #b8c7ce;
+    border-bottom: 1px solid #1a2229;
+}
+
+.nav-links li:hover,
+.nav-links li.active {
+    background: #1e282c;
+    color: white;
+    border-left-color: #3498db;
+    font-weight: bold;
+}
+
+.logout-link {
+    color: #e74c3c !important;
+}
+
+
+/* MAIN FRAME PANELS */
+
+.main-content {
+    flex: 1;
+    padding: 25px;
+    background-color: #ecf0f5;
+}
+
+.content-page {
+    display: none;
+}
+
+.content-page.active {
+    display: block;
+}
+
+
+/* CARDS DESIGN & HEADERS */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #d2d6de;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 12px 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+
+/* ADAPTIVE REUSE COLORS */
+
+.bg-red {
+    background-color: #dd4b39;
+}
+
+.bg-red-light {
+    background-color: #e74c3c;
+}
+
+.bg-blue {
+    background-color: #3c8dbc;
+}
+
+.bg-green {
+    background-color: #00a65a;
+}
+
+.bg-brown {
+    background-color: #6e4e37;
+}
+
+.bg-purple {
+    background-color: #9b59b6;
+}
+
+.bg-dark {
+    background-color: #34495e;
+}
+
+.bg-orange {
+    background-color: #f39c12;
+    color: white;
+}
+
+
+/* TABLES CONFIGURATION */
+
+.data-table,
+.log-table,
+.marks-entry-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.data-table th {
+    background: #fbfbfb;
+    font-weight: 600;
+}
+
+.pct-cell {
+    font-weight: bold;
+}
+
+.badge-success {
+    background: #00a65a;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.badge-danger {
+    background: #dd4b39;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+
+/* SPLIT COMPONENT */
+
+.bottom-flex {
+    display: flex;
+    gap: 20px;
+}
+
+.flex-child {
+    flex: 1;
+}
+
+.btn-action {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.present {
+    background-color: #3c8dbc;
+}
+
+.absent {
+    background-color: #dd4b39;
+}
+
+.table-input-marks {
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+}
+
+.btn-save-marks {
+    width: 100%;
+    padding: 10px;
+    background: #6e4e37;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+/* RIGHT COLUMN LISTS */
+
+.stats-card {
+    padding: 20px;
+}
+
+.subject-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.subject-item.selected {
+    background-color: #ebf3f9;
+    border-left: 4px solid #3c8dbc;
+}
+
+
+/* INPUT FORM GENERAL UNITS */
+
+.form-card {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-submit-form {
+    padding: 12px 24px;
+    background: #3c8dbc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
